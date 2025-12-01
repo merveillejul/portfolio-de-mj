@@ -559,23 +559,47 @@ OBJECTIF VEILLE — Cloud & DevOps
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
 <script>
-// Initialisation EmailJS
 (function(){
-    emailjs.init("fOeEeGalxav14p22zydci");
+    emailjs.init("FhxJ3-8ItnFDIgz1C"); 
 })();
 
-// Envoi du formulaire
 document.getElementById("contact-form").addEventListener("submit", function(event) {
     event.preventDefault();
 
+    const status = document.getElementById("form-status");
+
+    // Message pendant l’envoi
+    status.innerHTML = "Envoi en cours...";
+    status.style.background = "#e7d9ff";
+    status.style.color = "#6b39c8";
+    status.classList.add("show");
+
     emailjs.sendForm("service_9v7k91a", "template_uv41ovm", this)
-        .then(function() {
-            alert("Message envoyé avec succès !");
-        }, function(error) {
-            alert("Erreur lors de l'envoi: " + JSON.stringify(error));
+        .then(() => {
+            // Success
+            status.innerHTML = "✔ Message envoyé avec succès !";
+            status.style.background = "#a97bdc";
+            status.style.color = "#d7a5ef";
+            status.classList.add("show");
+
+            // Clear form
+            document.getElementById("contact-form").reset();
+
+            // Disparition après 4 sec
+            setTimeout(() => {
+                status.classList.remove("show");
+            }, 4000);
+        })
+        .catch(() => {
+            // Error
+            status.innerHTML = "❌ Une erreur est survenue. Réessayez.";
+            status.style.background = "#a97bdc";
+            status.style.color = "#d7a5ef";
+            status.classList.add("show");
         });
 });
 </script>
+
 
 </body>
 </html>
