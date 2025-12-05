@@ -1,41 +1,40 @@
-window.addEventListener("scroll", function(){
-        const navbar = document.querySelector(".navbar");
-        if(window.scrollY > 50){
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
-        }
-    });
+// Effet scroll : navbar qui change
+window.addEventListener("scroll", function () {
+    const navbar = document.querySelector(".header-bar"); // nouveau nom
+    if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+    } else {
+        navbar.classList.remove("scrolled");
+    }
+});
 
-
-    
-
-const burger = document.getElementById("burger");
-const mobileMenu = document.getElementById("mobileMenu");
+// Menu burger
+const burger = document.getElementById("menuButton"); // nouveau nom
+const mobileMenu = document.getElementById("menuPanel"); // nouveau nom
 
 burger.addEventListener("click", () => {
     burger.classList.toggle("active");
     mobileMenu.classList.toggle("show");
 });
 
-// Ferme le menu après clic sur un lien
-document.querySelectorAll(".mobile-menu a").forEach(link => {
+// Fermer le menu après clic sur un lien mobile
+document.querySelectorAll(".menu-panel a").forEach(link => { // nouveau nom
     link.addEventListener("click", () => {
         burger.classList.remove("active");
         mobileMenu.classList.remove("show");
     });
 });
 
-// Active menu link based on scroll position
+// Active le lien du menu en fonction du scroll
 const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".menu-depth a");
+const navLinks = document.querySelectorAll(".nav-menu a"); // nouveau nom
 
 window.addEventListener("scroll", () => {
     let current = "";
 
     sections.forEach(section => {
         const sectionTop = section.offsetTop - 150;
-        if (pageYOffset >= sectionTop) {
+        if (window.pageYOffset >= sectionTop) {
             current = section.getAttribute("id");
         }
     });
@@ -48,7 +47,3 @@ window.addEventListener("scroll", () => {
         }
     });
 });
-
-
-
-
